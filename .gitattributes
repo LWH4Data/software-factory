@@ -1,0 +1,4 @@
+# 검수된 패키지 3파일의 바이트를 줄바꿈 변환 없이 보존한다.
+/.agents/plugins/marketplace.json -text
+/software-factory/plugin.json -text
+/software-factory/skills/software-factory/SKILL.md -text

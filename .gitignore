@@ -1,0 +1,30 @@
+# 배포 6파일만 허용한다. 강제 추가나 기존 추적 파일은 별도 검수한다.
+*
+!/.gitignore
+!/.gitattributes
+!/README.md
+!/.agents/
+!/.agents/plugins/
+!/.agents/plugins/marketplace.json
+!/software-factory/
+!/software-factory/plugin.json
+!/software-factory/skills/
+!/software-factory/skills/software-factory/
+!/software-factory/skills/software-factory/SKILL.md
+
+# 외부 운영 기록·비밀값·환경파일·임시파일의 유입을 예방한다.
+**/records/
+**/work/
+**/outputs/
+**/secrets/
+**/tmp/
+**/temp/
+**/.env
+**/.env.*
+**/*.pem
+**/*.key
+**/*.p12
+**/*.pfx
+**/*.log
+**/*.swp
+**/*~

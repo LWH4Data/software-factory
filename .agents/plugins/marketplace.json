@@ -1,0 +1,20 @@
+{
+  "name": "software-factory-local",
+  "interface": {
+    "displayName": "Software Factory 로컬"
+  },
+  "plugins": [
+    {
+      "name": "software-factory",
+      "source": {
+        "source": "local",
+        "path": "./software-factory"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "Productivity"
+    }
+  ]
+}
