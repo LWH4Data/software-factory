@@ -1,6 +1,6 @@
 # Software Factory
 
-사용자와 명세를 합의하고 개발·독립 검수·완료보고를 운영하는 Codex 플러그인이다. 플러그인 이름은 `software-factory`, marketplace 이름은 `software-factory-local`, 패키지 버전은 `0.1.0`이다. Private 배포 대상은 [LWH4Data/software-factory](https://github.com/LWH4Data/software-factory)다.
+사용자와 명세를 합의하고 개발·독립 검수·완료보고를 운영하는 Codex 플러그인이다. 플러그인 이름은 `software-factory`, marketplace 이름은 `software-factory-local`, 패키지 버전은 `0.1.1`이다. 현재 공개(public) 배포 저장소는 [LWH4Data/software-factory](https://github.com/LWH4Data/software-factory)다. 이 로컬 변경의 게시·설치본 갱신은 별도 승인과 검수 후에 수행한다.
 
 ## 두 흐름과 역할
 
@@ -10,6 +10,8 @@
 main은 협의·배정·결정 기록·통합판정·보고를 맡고 제품 코드·테스트·설정은 worker가 작성한다. 추가 에이전트 생성은 main만 맡으며 worker/reviewer는 재위임하지 않는다. 필요한 다중 에이전트 도구가 없으면 해당 개발·검수 작업을 대기하고 제한을 보고한다. 원본 프로젝트 지침을 우선한다.
 
 설치만으로 개발이 승인되거나 시작되지 않는다. 자동 merge·상주 서비스·보고 자동 강제도 없다. 외부 쓰기·티켓·commit/push·PR/merge·설치는 대상과 행위별 권한을 따로 확인한다.
+
+개발 종료 후 사이클 최종 완료보고 전에만 [사이클 종료 점검](software-factory/skills/software-factory/references/cycle-close-checklist.md)을 읽어 컨텍스트·반복 역할의 하네스 편입 후보·의존성·파일 인덱싱·코드 품질을 기존 독립 검수와 main 대조에 통합한다. 시작·일반 개발·개별 task 완료마다 반복하지 않으며 결과와 최신 고정 대상 식별을 완료보고에 연결한다. 완료 차단 결함과 다음 cycle 개선을 구분하고 운영자가 채택을 결정한다.
 
 ## 보고와 기록
 
@@ -23,22 +25,23 @@ main은 협의·배정·결정 기록·통합판정·보고를 맡고 제품 코
 
 ## 배포 소스 격리
 
-이 저장소의 루트는 제품 저장소와 분리된 플러그인 배포 소스다. Git 대상은 다음 6파일로 한정한다.
+이 저장소의 루트는 제품 저장소와 분리된 플러그인 배포 소스다. Git 대상은 다음 7파일로 한정한다.
 
 ```text
 .agents/plugins/marketplace.json
 software-factory/plugin.json
 software-factory/skills/software-factory/SKILL.md
+software-factory/skills/software-factory/references/cycle-close-checklist.md
 README.md
 .gitignore
 .gitattributes
 ```
 
-프로젝트 운영 기록·개발 산출물·비밀값·환경파일·임시파일은 포함하지 않는다. `.gitignore`는 위 파일만 허용하고 `.gitattributes`는 패키지 3파일의 텍스트 줄바꿈 변환을 끈다. 첫 명세에서 프로젝트별 제품 repo 밖의 절대 기록 root를 합의하고 실제 경로가 repo 밖인지 확인한다. 설치 캐시는 기록 root가 아니다.
+프로젝트 운영 기록·개발 산출물·비밀값·환경파일·임시파일은 포함하지 않는다. `.gitignore`는 위 파일만 허용하고 `.gitattributes`는 패키지 4파일의 텍스트 줄바꿈 변환을 끈다. 첫 명세에서 프로젝트별 제품 repo 밖의 절대 기록 root를 합의하고 실제 경로가 repo 밖인지 확인한다. 설치 캐시는 기록 root가 아니다.
 
 ## 검수된 커밋으로 설치
 
-Codex CLI와 private GitHub 저장소 접근 권한·Git 인증이 필요하다. 인증정보는 배포 소스에 저장하지 않는다.
+Codex CLI가 필요하다. 현재 공개 배포 소스를 읽기 위해 private GitHub 저장소 접근 권한을 전제하지 않는다. 공개 안내도 설치·출처 전환 승인을 대신하지 않는다. 인증정보는 배포 소스에 저장하지 않는다.
 
 먼저 기존 출처를 조회한다.
 

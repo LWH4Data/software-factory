@@ -1,7 +1,7 @@
 {
   "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
   "name": "software-factory",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "사용자와 명세를 합의하고 worker 개발·독립 검수·main 완료보고를 진행하는 운영 절차",
   "extensions": {
     "com.openai": {
