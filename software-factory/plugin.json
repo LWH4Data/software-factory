@@ -1,16 +1,16 @@
 {
   "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
   "name": "software-factory",
-  "version": "0.1.1",
-  "description": "사용자와 명세를 합의하고 worker 개발·독립 검수·main 완료보고를 진행하는 운영 절차",
+  "version": "0.1.2",
+  "description": "Operating workflow for specification agreement with the user, worker implementation, independent review, and the main agent's completion report",
   "extensions": {
     "com.openai": {
       "interface": {
         "displayName": "Software Factory",
-        "shortDescription": "명세 합의와 개발·독립 검수·완료보고",
+        "shortDescription": "Spec agreement, implementation, independent review, reporting",
         "defaultPrompt": [
-          "$software-factory로 이번 프로젝트의 개발 목표와 명세를 함께 작성해 주세요.",
-          "$software-factory로 승인된 명세와 checkpoint를 확인해 작업을 재개하거나 완료보고를 정리해 주세요."
+          "Use $software-factory to draft this project's development goals and specification with me.",
+          "Use $software-factory to check the approved specification and checkpoint, then resume work or prepare the completion report."
         ]
       }
     }

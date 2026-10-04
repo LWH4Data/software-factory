@@ -1,66 +1,92 @@
 # Software Factory
 
-사용자와 명세를 합의하고 개발·독립 검수·완료보고를 운영하는 Codex 플러그인이다. 플러그인 이름은 `software-factory`, marketplace 이름은 `software-factory-local`, 패키지 버전은 `0.1.1`이다. 현재 공개(public) 배포 저장소는 [LWH4Data/software-factory](https://github.com/LWH4Data/software-factory)다. 이 로컬 변경의 게시·설치본 갱신은 별도 승인과 검수 후에 수행한다.
+A Codex plugin for specification agreement with the user, implementation, independent review, and completion reporting. Plugin name: `software-factory`; marketplace: `software-factory-local`; package version: `0.1.2`. Public source repository: [LWH4Data/software-factory](https://github.com/LWH4Data/software-factory).
 
-## 두 흐름과 역할
+These files are the 0.1.2 release source for the English canonical instructions. Publication and installation updates require target-specific authorization and review. Source availability alone does not establish deployment, installation, actual skill loading, or runtime verification. See the [한국어 사용 안내](README.ko.md) for Korean usage guidance. English instructions do not set the response language: outputs follow the user's explicit language preference, or otherwise the conversation's language.
 
-1. 사용자와 main이 목표·범위·제외 사항·완료기준·쓰기권한·기록위치·명세 버전·cycle 종료일을 합의한다.
-2. 승인된 명세에 따라 worker가 허용 파일을 개발하고, 구현자와 다른 reviewer가 고정 산출물을 검수한다. main은 명세와 증거를 대조해 결과를 보고한다.
+## Two workflows and roles
 
-main은 협의·배정·결정 기록·통합판정·보고를 맡고 제품 코드·테스트·설정은 worker가 작성한다. 추가 에이전트 생성은 main만 맡으며 worker/reviewer는 재위임하지 않는다. 필요한 다중 에이전트 도구가 없으면 해당 개발·검수 작업을 대기하고 제한을 보고한다. 원본 프로젝트 지침을 우선한다.
+1. The user and main agree on goals, scope, exclusions, completion criteria, write authority, record location, specification version, and the cycle scope/completion boundary. Agree on an end date only when needed; no fixed cadence is assumed.
+2. Under the approved specification, a worker develops allowed files and a reviewer other than the implementer reviews the fixed artifacts. Main compares the specification and evidence, then reports results.
 
-설치만으로 개발이 승인되거나 시작되지 않는다. 자동 merge·상주 서비스·보고 자동 강제도 없다. 외부 쓰기·티켓·commit/push·PR/merge·설치는 대상과 행위별 권한을 따로 확인한다.
+Main handles agreement, assignments, decision records, integrated assessment, and reporting; workers write product code, tests, and configuration. Only main creates additional agents; workers/reviewers must not delegate again or substitute a new Codex chat. If required multi-agent tools are unavailable, hold the affected implementation/review and report the limitation. Original project instructions take priority.
 
-개발 종료 후 사이클 최종 완료보고 전에만 [사이클 종료 점검](software-factory/skills/software-factory/references/cycle-close-checklist.md)을 읽어 컨텍스트·반복 역할의 하네스 편입 후보·의존성·파일 인덱싱·코드 품질을 기존 독립 검수와 main 대조에 통합한다. 시작·일반 개발·개별 task 완료마다 반복하지 않으며 결과와 최신 고정 대상 식별을 완료보고에 연결한다. 완료 차단 결함과 다음 cycle 개선을 구분하고 운영자가 채택을 결정한다.
+Installation alone does not authorize or start development. There is no automatic merging, resident service, or automatic reporting enforcement. Check authority for each target/action separately for external writes, tickets, commit/push, PR/merge, and installation.
 
-## 보고와 기록
+A cycle can end when its approved work, required checks, independent review, and main's evidence assessment/report are complete. Missing required checks or reaching the project's approved retry/stop boundary leaves affected work waiting or unverified. A necessary retry/stop policy that is undefined requires a decision before retrying; these common instructions do not set retry numbers.
 
-완료보고에는 결과·명세 버전·변경 파일·검증 한계·미해결 질문·다음 행동·소유권과 아래 짧은 소절을 포함한다.
+Read only the relevant [operating example](software-factory/skills/software-factory/references/operating-examples.md): [preparation](software-factory/skills/software-factory/references/operating-examples.md#preparation) when checking a recipe's present applicability and verification means; [current state](software-factory/skills/software-factory/references/operating-examples.md#current-state) for current canonical pointers; [bounded evidence](software-factory/skills/software-factory/references/operating-examples.md#bounded-evidence) for a focused lookup or path/field error; [failure and resumption](software-factory/skills/software-factory/references/operating-examples.md#failure-and-resumption) for failed stages or incomplete checks. These examples require neither a new index nor a full audit per task. Keep paths, commands, and proof capture details project-local.
 
-- **필요·불편:** task·근거·영향·선택 개선안을 main이 정리하고 사용자가 채택한다. 실제 blocker만 관련 작업을 대기시킨다.
-- **하네스:** 실제 사용한 지침·skill·도구·검증·환경의 누락·충돌·실패·갱신 필요를 관찰 근거로 보고한다.
-- **에이전트 메모리 관리:** context 선별·반복 투입·요약 손실·오래된 결정·인계·checkpoint 문제를 보고한다. 개인 메모리나 인증정보를 보고 목적으로 읽지 않고 자동 메모리 상태·사용·효과를 추정하지 않는다.
+Only after development ends and before the cycle's final completion report, read the [cycle close checklist](software-factory/skills/software-factory/references/cycle-close-checklist.md). Integrate context, repeated roles as candidates for harness inclusion, dependencies, file indexing, and code quality into existing independent review and main's evidence comparison. Do not repeat it at startup, during ordinary development, or at each task completion. Link results and the latest fixed target identifier to the completion report. Distinguish completion-blocking defects from next-cycle improvements; the operator decides adoption.
 
-관찰·추론·미확인을 구분한다. 근거가 없으면 `미확인`, 관찰된 문제가 없으면 `없음(미관찰)`으로 기록한다. 보고나 개선 채택은 후속 구현 승인이 아니다.
+## Reports and records
 
-## 배포 소스 격리
+Completion reports include results, spec version, changed files, verification limits, unresolved questions, next action, ownership, and these brief sections, with equivalent headings in the chosen output language:
 
-이 저장소의 루트는 제품 저장소와 분리된 플러그인 배포 소스다. Git 대상은 다음 7파일로 한정한다.
+- **Needs and friction:** Main consolidates tasks, evidence, impact, and optional improvements; the user decides adoption. Only actual blockers hold the affected work.
+- **Harness:** Report observed gaps, conflicts, failures, or update needs in instructions, skills, tools, verification, and environments actually used.
+- **Agent memory management:** Report context selection/repeated loading, summary loss, stale decisions, and handoff/checkpoint issues. Do not read personal memory or authentication information for reporting, or infer automatic memory's state, use, or effects.
+
+Distinguish observed, inferred, and unverified findings. Use `unverified` when evidence is absent and `none (not observed)` when no problem was observed; equivalent labels in the report language are allowed. Reporting or adopting improvements does not authorize subsequent implementation.
+
+## Distribution source isolation
+
+This repository root contains plugin distribution source separate from the product repository. The Git allowlist contains only these ten files; distribution source itself does not authorize Git writes or publication:
 
 ```text
 .agents/plugins/marketplace.json
 software-factory/plugin.json
 software-factory/skills/software-factory/SKILL.md
 software-factory/skills/software-factory/references/cycle-close-checklist.md
+software-factory/skills/software-factory/references/operating-examples.md
 README.md
+README.ko.md
+requirements-dev.txt
 .gitignore
 .gitattributes
 ```
 
-프로젝트 운영 기록·개발 산출물·비밀값·환경파일·임시파일은 포함하지 않는다. `.gitignore`는 위 파일만 허용하고 `.gitattributes`는 패키지 4파일의 텍스트 줄바꿈 변환을 끈다. 첫 명세에서 프로젝트별 제품 repo 밖의 절대 기록 root를 합의하고 실제 경로가 repo 밖인지 확인한다. 설치 캐시는 기록 root가 아니다.
+Exclude project operational records, development artifacts, virtual environments, authentication material, secrets, environment files, and temporary files. `.gitignore` allows only the files above; inspect forced additions and already tracked files separately. `.gitattributes` disables text line-ending conversion for the five package files. In the first specification, agree on a project-specific absolute record root outside the product repository and confirm its actual location is outside it. The installation cache is not a record root.
 
-## 검수된 커밋으로 설치
+## Install from a reviewed commit
 
-Codex CLI가 필요하다. 현재 공개 배포 소스를 읽기 위해 private GitHub 저장소 접근 권한을 전제하지 않는다. 공개 안내도 설치·출처 전환 승인을 대신하지 않는다. 인증정보는 배포 소스에 저장하지 않는다.
+Codex CLI is required. Reading the published public source does not assume private GitHub repository access. Public instructions do not substitute for installation/source-transition authorization. Do not store authentication information in distribution source.
 
-먼저 기존 출처를 조회한다.
+First inspect existing sources:
 
 ```sh
 codex plugin marketplace list --json
 codex plugin list --json
 ```
 
-`software-factory-local`이라는 marketplace가 이미 있으면 `marketplaceSource`와 출처를 확인하고 사용자 승인을 받는다. 승인 전 아래 등록·설치 명령을 실행하지 않는다. 같은 이름의 marketplace를 자동 덮어쓰기하거나 `remove`로 삭제하지 않는다. 출처가 불명확하면 전환을 대기한다.
+If a marketplace named `software-factory-local` already exists, check its `marketplaceSource` and provenance and obtain user authorization. Do not run the registration/installation commands below before authorization. Do not automatically overwrite a marketplace with the same name or delete it using `remove`. Hold the transition if provenance is unclear.
 
-이름 충돌이 없거나 출처 확인과 전환 승인이 끝난 경우, 배포된 검수 완료 커밋으로 등록·설치한다. 아래 `<reviewed-commit-sha>`는 placeholder이며 전달받은 검수 완료 커밋의 전체 SHA로 바꾼다. 이 README에 자신의 커밋 해시를 삽입하지 않는다.
+Once there is no name collision, or source verification and transition authorization are complete, register/install a published, reviewed commit. Replace the placeholder `<reviewed-commit-sha>` below with the full SHA of the reviewed commit provided to you. Do not insert this README's own commit hash into it.
 
 ```sh
 codex plugin marketplace add LWH4Data/software-factory --ref <reviewed-commit-sha>
 codex plugin add software-factory@software-factory-local --json
 ```
 
-설치 후 위 조회 명령으로 출처·버전·installed/enabled 값을 확인한다. 설치 확인과 실제 대화에서의 skill 로딩·운영 준수 확인은 구분한다.
+After installation, use the inspection commands above to check source, version, and installed/enabled values. Distinguish installation verification from actual skill loading and workflow compliance in a conversation.
 
-호출 예: `$software-factory로 이번 프로젝트의 개발 목표와 명세를 함께 작성해 주세요.` 재개·완료보고도 승인된 명세와 최신 checkpoint를 확인해 요청한다.
+Example request: `Use $software-factory to draft this project's development goals and specification with me.` For resumption/completion reports, also ask it to check the approved specification and latest checkpoint.
 
-명령과 marketplace 형식의 공식 근거: [Package your plugin](https://developers.openai.com/plugins/build/plugins), [Developer commands](https://learn.chatgpt.com/docs/developer-commands).
+Official references for commands and marketplace format: [Package your plugin](https://developers.openai.com/plugins/build/plugins), [Developer commands](https://learn.chatgpt.com/docs/developer-commands).
+
+## Development validation environment
+
+`requirements-dev.txt` pins development-only validation dependencies (`PyYAML==6.0.3`; Python 3.8 or later). These are not runtime requirements for ordinary plugin installation. Use a separate virtual environment outside the distribution/product repositories. Do not change global Python, PATH, pip configuration, or an installed plugin.
+
+From this distribution root, replace `<external-validation-dir>` with your chosen external validation directory and `<skill-creator-dir>` with the Skill Creator directory in your own Codex installation. Its `scripts/quick_validate.py` is a built-in helper, not a script shipped by this package. This PowerShell example avoids activation and shared pip cache writes:
+
+```powershell
+python -B -X utf8 -m venv "<external-validation-dir>/.venv"
+$validationPython = "<external-validation-dir>/.venv/Scripts/python.exe"
+& $validationPython -B -X utf8 -m pip --isolated install --no-cache-dir --only-binary=:all: -r ./requirements-dev.txt
+& $validationPython -B -X utf8 "<skill-creator-dir>/scripts/quick_validate.py" ./software-factory/skills/software-factory
+```
+
+On POSIX systems, use the virtual environment's `bin/python` with the same requirements file and `-B -X utf8` validator arguments. `-B` suppresses bytecode writes; `-X utf8` selects UTF-8 mode. Record the interpreter, imported dependency provenance, fixed source hashes, and actual validator exit/output.
+
+The automatic validator checks frontmatter, naming, and unfinished scaffold placeholders. It does not establish translation fidelity, sound decisions, product behavior, actual skill selection/loading, or GUI/accessibility results. Source freeze precedes validation; independent semantic review and main's evidence comparison remain necessary. Source validation alone does not establish publication, an installed-copy update, or runtime behavior.

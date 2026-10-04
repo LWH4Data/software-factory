@@ -1,67 +1,76 @@
 ---
 name: software-factory
-description: 프로젝트 개발의 시작·재개에서 사용자와 명세를 합의하고 승인 작업을 worker 개발·독립 reviewer 검수·main 완료보고로 운영한다. 종료 보고에 필요·불편, 하네스, 에이전트 메모리 관리를 포함할 때 사용한다.
+description: Agree on a project specification with the user at development start or resumption, then coordinate authorized worker implementation, independent review, and the main agent's completion report, including needs and friction, harness, and agent memory management.
 ---
 
 # Software Factory
 
-기능은 두 흐름이다: 사용자+main 명세 작성, 승인 명세에 따른 worker 개발 → 다른 reviewer 검수 → main 완료보고. 기존 Codex와 사용자 사용량으로 운영한다. 설치만으로 개발을 시작하거나 상주 daemon을 실행하거나 보고를 자동 강제하지 않는다. 자동 skill 선택 기본값을 유지하되 현재 요청의 시작·재개·종료 문맥과 실제 권한을 확인한다.
+Use two workflows: user + main specification drafting; then worker implementation → a different reviewer's review → main's completion report under the approved specification. Operate within existing Codex access and the user's usage allowance. Installation alone does not start development, run a resident daemon, or automatically enforce reporting. Preserve the default automatic skill selection, while checking the current request's start, resumption, or close context and actual authority.
 
-## 공통 경계와 기록
+Use the user's explicit preferred output language; otherwise use the conversation's language. Report headings and evidence labels may use equivalent wording in that language.
 
-- 현재 프로젝트에 적용되는 원본 AGENTS/override를 먼저 읽고 우선한다. 충돌은 main에 질문하고 영향을 받는 작업만 대기한다. 기존 지침·사용자 파일·다른 작업자의 변경을 보존하며 전역 무관 설정을 바꾸지 않는다.
-- main은 명세 협의·배정·결정 기록·증거 대조·통합판정·보고를 담당한다. 제품 코드·테스트·설정의 작성·수정은 worker만 수행한다. main의 직접 구현·핫픽스·자동 fallback은 금지한다.
-- 추가 에이전트는 main만 생성한다. worker/reviewer는 재위임하거나 새 Codex chat으로 대체하지 않는다. 필요한 multi_agent 도구가 없으면 해당 개발·검수 작업을 대기하고 도구 한계를 보고한다. 독립 명세 협의·조사는 계속할 수 있다.
-- 명세 승인만으로 외부쓰기·Issue 발행·Git commit/push/PR/merge·설치 권한을 추정하지 않는다. 대상·행위·권한을 따로 확인한다. 자동 merge는 금지한다. 보고나 개선 채택도 후속 구현·설치·자동 메모리 활성화 승인이 아니다.
-- 패키지는 원본 제품 repo와 별도 위치에 둔다. 첫 명세에서 프로젝트별 **repo 밖 absolute record root**와 기록 대상·소유권을 합의한다. repo root와 기록 root의 실제 경로를 확인하고 기록 위치가 repo 밖인지 대조한다. 미합의 시 대화에서 초안을 작성할 수 있으나 repo 내부 운영 파일을 생성하지 않는다. 플러그인 설치 캐시를 프로젝트 기록 root로 간주하지 않는다.
-- 기록 root 합의 후 승인된 범위에서 명세·결정·packet·checkpoint·증거·프로젝트별 필요/불편을 그곳에 기록한다. 제품 write set과 운영 기록 write set을 구분한다. GitHub Issues는 승인된 백로그 대상이며 자동 티켓·동기화·Git 배치를 추가하지 않는다.
+## Shared boundaries and records
 
-## 흐름 1: 사용자와 명세 작성
+- Read and prioritize the original AGENTS/override instructions applicable to the current project. Ask main about conflicts and hold only the affected work. Preserve existing instructions, user files, and other workers' changes; do not change unrelated global settings.
+- Main handles specification agreement, assignments, decision records, evidence comparison, integrated assessment, and reporting. Only workers write or modify product code, tests, and configuration. Main must not implement directly, hotfix, or act as an automatic fallback.
+- Only main creates additional agents. Workers/reviewers must not delegate again or substitute a new Codex chat. If required multi_agent tools are unavailable, hold the affected implementation/review and report the tool limitation. Independent specification discussions and research may continue.
+- Specification approval alone does not authorize external writes, Issue creation, Git commit/push/PR/merge, or installation. Check the target, action, and authority separately. Automatic merging is prohibited. Reporting or adopting an improvement does not authorize subsequent implementation, installation, or automatic memory activation.
+- Keep the package separate from the original product repository. In the first specification, agree on a project-specific **absolute record root outside the repository**, record targets, and ownership. Resolve the actual repository and record root paths and confirm that records are outside the repository. Until agreed, drafts may remain in the conversation, but do not create operational files inside the repository. A plugin installation cache is not the project's record root.
+- Once the record root is agreed, record specifications, decisions, packets, checkpoints, evidence, and project-specific needs/friction there within the approved scope. Distinguish product and operational record write sets. GitHub Issues is the authorized backlog destination; do not add automatic ticketing, synchronization, or Git batches.
 
-main은 현재 목표와 기존 결정 중 필요한 구간만 확인해 다음 내용을 사용자와 합의한다. 미정은 질문·영향 task/deps로 남기며 제안·추측·검토 의견을 승인으로 승격하지 않는다.
+## Workflow 1: Draft the specification with the user
 
-| 명세 항목 | 합의할 내용 |
+Main reads only the needed portions of the current goal and existing decisions, then agrees on the following with the user. Record unresolved matters as questions with affected tasks/deps. Do not promote proposals, assumptions, or review opinions into approvals.
+
+| Specification item | Agreement needed |
 | --- | --- |
-| 목표·범위·제외 | 해결할 문제, 이번 대상과 제외 사항 |
-| 완료기준 | 관찰 가능한 수용 기준, 필요한 검증과 검증 한계 |
-| 허용쓰기 | 제품/운영 기록별 대상 파일·담당자, 별도 외부 행위 권한 |
-| 기록위치 | 프로젝트별 repo 밖 absolute record root, 정본 문서와 증거 위치 |
-| 버전·변경 근거 | spec version, 사용자 승인 근거, 변경 이유와 영향 task/deps |
-| cycle | 이번 cycle 범위와 사용자와 정한 종료일; 고정 주기를 가정하지 않음 |
+| Goal, scope, exclusions | Problem to solve, current targets, and exclusions |
+| Completion criteria | Observable acceptance criteria, required verification, and its limits |
+| Allowed writes | Target files and owners for product/operational records; separate authority for external actions |
+| Record location | Project-specific absolute record root outside the repository; canonical documents and evidence locations |
+| Version and change basis | Spec version, evidence of user approval, reasons for changes, and affected tasks/deps |
+| Cycle | Current cycle scope and completion boundary agreed with the user; agree on an end date only when needed, without assuming a fixed cadence |
 
-초안은 승인 상태와 분리한다. 실제 개발은 승인된 명세·write set·worker·독립 reviewer 배정이 갖춰진 범위에서 진행한다. 명세 변경은 새 버전과 승인 근거를 남기고 영향을 받는 작업에 인계한다.
+Keep drafts distinct from approved specifications. Develop only within a scope that has an approved specification, write set, worker, and independent reviewer assignment. Record specification changes with a new version and approval evidence, and hand them off to affected tasks.
 
-## 흐름 2: 개발·검수·완료보고
+A completion boundary can be the approved work, required checks, independent review, and main's evidence assessment/report. Missing required checks or reaching a retry/stop boundary is not successful completion; report affected work as waiting or unverified and seek direction under the project's approved policy.
 
-main은 작업을 작은 packet으로 나누고 파일 소유권 중복을 해소한다. 중복 write set은 순차 인계하며 이전 담당자의 쓰기 종료를 확인한다. 모든 packet에 다음 10필드를 넣는다.
+When assessing whether an existing recipe fits the current work, read the [preparation example](references/operating-examples.md#preparation). It does not require a full audit for every task.
+
+## Workflow 2: Implement, review, and report completion
+
+Main divides work into small packets and resolves overlapping file ownership. Hand off overlapping write sets sequentially, confirming that the previous owner has stopped writing. Include these ten fields in every packet:
 
 `cycle`, `task`, `spec version`, `owner`, `allowed files`, `deps`, `acceptance`, `evidence`, `requested decisions`, `return limit`.
 
-worker/reviewer는 원본 지침 → 자기 packet → 관련 기록/checkpoint → 승인 명세 버전·결정 → 필요한 파일·근거 순으로 읽는다. 전체 대화·AGENTS 이력·자료를 반복 투입하지 않고 필요한 명세·결정·근거의 파일/구간만 context에 넣는다. 이 필드들은 인계 규약이며 제품 API·DB·Issue 상태 모델을 확정하지 않는다.
+Workers/reviewers read original instructions → their own packet → relevant records/checkpoint → approved specification version and decisions → necessary files/evidence. Load only relevant files/sections of specifications, decisions, and evidence into context; do not repeatedly load entire conversations, AGENTS histories, or source collections. These fields define handoffs, not product APIs, databases, or Issue state models.
 
-- worker는 허용 파일만 변경하고 수용 기준에 맞는 검증 증거·미실행 한계를 반환한다. 실제 blocker는 해당 task의 질문·증거·영향 deps에 연결해 그 작업만 대기한다. 일반 필요·불편은 개발을 자동 중단하지 않고 완료 시 보고한다.
-- main은 구현자와 다른 reviewer에게 승인 spec, 고정된 diff/산출물 버전(해시 또는 revision), 검증 증거·제한과 필요한 원자료만 인계한다. 구현자의 사고과정·자기평가나 다른 reviewer 결론으로 최초 검토를 유도하지 않는다. reviewer는 최초 검토를 끝내기 전 다른 독립 검토자의 결과를 읽지 않는다.
-- reviewer는 명세 충족, 패턴, 제품 완성도·실패 처리, 구조·의존성·인터페이스, 병합·인계 위험, 하네스 갱신과 skill/자료 추출 필요를 검토한다. main은 그 의견도 명세와 고정 증거에 대조한다. 산출물 변경 후 영향받는 검수를 새 버전으로 갱신하고 과거 통과를 승계하지 않는다.
-- checkpoint 최소 필드는 완료한 산출물, 변경 파일, 근거, 미해결 질문, 다음 행동, 현재 소유권이다. task/spec version과 고정 대상도 식별한다. 재개 시 최신 checkpoint와 현재 권한·버전을 확인해 이어가고, 불명확한 외부쓰기 결과는 읽기로 확인하며 무조건 재실행하지 않는다.
-- worker와 reviewer는 각각 task, 사용한 지침/참조, 문제·필요·불편, 근거, 영향, 선택 개선안, 변경 파일·검증 한계를 반환한다. 상세 증거는 합의한 기록 root에, 짧은 인계는 return limit 안에 남긴다. 사실 제보, main의 중복·영향·우선순위 정리, 사용자 채택 결정·이유를 구분한다.
-- main은 검증된 결과와 미해결 사항을 보고한다. 구현자 자기 승인, 산출물 작성 완료를 제품 완료·사용자 수용·Issue 종료·merge 승인으로 바꾸지 않는다. 인계 후 main이 에이전트를 종료/재사용하며 재사용은 새 packet으로 권한·소유권을 확인한다.
+Read only the relevant [operating example](references/operating-examples.md): [current state](references/operating-examples.md#current-state) when locating or updating current canonical pointers; [bounded evidence](references/operating-examples.md#bounded-evidence) when narrowing a lookup or recovering from a path/field error; [failure and resumption](references/operating-examples.md#failure-and-resumption) when a stage fails or work resumes with incomplete checks.
 
-개발 종료 후 사이클 최종 완료보고 전에만 [사이클 종료 점검](references/cycle-close-checklist.md)을 읽고 기존 독립 검수·main 대조에 통합한다. 시작·일반 개발·개별 task 완료마다 상세 점검을 반복하지 않는다. 완료보고에는 종료 점검 결과와 최신 고정 대상 식별을 연결한다.
+- Workers change only allowed files and return verification evidence against acceptance criteria, including limits from checks not run. Link actual blockers to the task's questions, evidence, and affected deps; hold only that work. General needs/friction do not automatically stop development; report them at completion.
+- Only when comparing original code with a test variant, workers must confirm before comparison: actual paths and revision or other identifiers for both sources, build settings, and which source/build produced each executable or artifact to be run. Leave brief, safe evidence references. If shared caches or intermediate artifacts risk mixing sources or settings, use separate build directories within the approved write set. If provenance or necessary separation cannot be confirmed, state the comparison's verification limits and do not report it as a confirmed pass; continue unrelated tasks. This does not require separate directories for every test/project or authorize deleting shared caches, changing global environments, or adding tools.
+- Main gives a reviewer other than the implementer the approved spec, fixed diff/artifact version (hash or revision), verification evidence/limits, and only necessary raw material. Do not steer the initial review with the implementer's thought process/self-assessment or another reviewer's conclusions. Reviewers must finish their initial review before reading other independent reviewers' results.
+- Reviewers examine specification compliance, patterns, product completeness and failure handling, structure/dependencies/interfaces, merge and handoff risks, harness updates, and needs to extract skills/materials. Main compares those opinions with the specification and fixed evidence. After artifacts change, refresh affected reviews against the new version; do not carry forward an earlier pass.
+- A checkpoint contains at least completed artifacts, changed files, evidence, unresolved questions, next action, and current ownership. Identify the task/spec version and fixed target too. Resume from the latest checkpoint after checking current authority/version. Resolve uncertain external write outcomes by reading their state, rather than unconditionally retrying.
+- Workers and reviewers each return their task, instructions/references used, problems/needs/friction, evidence, impact, optional improvements, changed files, and verification limits. Keep detailed evidence in the agreed record root and the brief handoff within the return limit. Distinguish factual reports, main's consolidation of duplicates/impact/priority, and the user's adoption decision/reason.
+- Main reports verified results and unresolved matters. Do not let implementers approve their own completion or equate artifact creation with product completion, user acceptance, Issue closure, or merge authorization. After handoff, main closes or reuses agents; reuse requires a new packet confirming authority and ownership.
 
-## 완료보고의 필수 짧은 소절
+Read the [cycle close checklist](references/cycle-close-checklist.md) only after development ends and before the cycle's final completion report. Integrate it into existing independent review and main's evidence comparison. Do not repeat the detailed checklist at startup, during ordinary development, or at every individual task completion. Link its results and the latest fixed target identifier in the completion report.
 
-결과·명세 버전·변경 파일·검증/제한·미해결 질문·다음 행동·소유권을 보고하고 아래 세 소절을 항상 붙인다. 별도 상세 보고서 세 개를 매번 만들지 않는다.
+## Required brief sections in completion reports
 
-### 필요·불편
+Report results, spec version, changed files, verification/limits, unresolved questions, next action, and ownership, always including the three brief sections below. Do not create three separate detailed reports each time.
 
-worker/reviewer의 task·근거·영향·선택 개선안을 main이 명세·증거에 대조해 중복과 우선순위를 정리한다. 사용자에게 채택할 결정과 영향받는 작업을 제시한다. 일반 개선은 완료 후 모으고 실제 blocker만 작업 중 해당 task에 연결한다.
+### Needs and friction
 
-### 하네스
+Main compares workers'/reviewers' tasks, evidence, impact, and optional improvements against the specification/evidence, consolidating duplicates and priorities. Present adoption decisions and affected work to the user. Gather general improvements after completion; link only actual blockers to their tasks during work.
 
-실제 사용한 지침·skill·도구·테스트/검증·실행환경에서 관찰한 누락·충돌·실패·갱신 필요와 근거·영향·선택 개선안을 짧게 보고한다. 코드나 실제 UI가 없으면 기능·시각·접근성 테스트를 했다고 주장하지 않는다.
+### Harness
 
-### 에이전트 메모리 관리
+Briefly report observed gaps, conflicts, failures, or update needs in instructions, skills, tools, tests/verification, and execution environments actually used, with evidence, impact, and optional improvements. Without code or an actual UI, do not claim functional, visual, or accessibility tests were performed.
 
-context 선별·반복 투입, 요약 손실·오래된 결정/spec, 인계·checkpoint·재개 문제를 관찰 근거로 보고한다. 실제 사용한 지속기억이 확인될 때만 안전한 출처 참조·유효성·민감정보 위험을 기록한다. 자동 메모리 on/off·생성·사용·내부 상태·효과를 추정하지 않는다.
+### Agent memory management
 
-보고 때문에 개인 메모리/인증파일·전체 프롬프트·비밀값·개인정보 원문·숨겨진 사고과정·개인 순위/점수를 수집하지 않는다. 관찰·추론·미확인을 구분하고 근거 없으면 `미확인`, 관찰된 문제가 없으면 `없음(미관찰)`으로 쓴다. `검증해 문제없음`과 구분한다. 한국어로 근거 있는 핵심 발견을 우선순위화하고, 5~8개를 목표로 하되 근거 없는 발견이나 무한한 미래 기능 목록을 만들지 않는다.
+Report context selection/repeated loading, summary loss, stale decisions/specs, and handoff/checkpoint/resumption issues using observed evidence. Record safe source references, validity, and sensitive-information risks for persistent memory only when its actual use is confirmed. Do not infer automatic memory's on/off state, creation, use, internal state, or effects.
+
+Do not collect personal memory/authentication files, full prompts, secrets, raw personal information, hidden thought processes, or individual rankings/scores for reporting. Distinguish observed, inferred, and unverified findings. Use `unverified` when evidence is absent and `none (not observed)` when no problem was observed; distinguish both from `verified with no issues`. Prioritize evidence-backed key findings in the chosen output language, aiming for 5–8 without inventing findings or an endless list of future features.

@@ -1,40 +1,40 @@
-# 사이클 종료 점검
+# Cycle close checklist
 
-개발 종료 후 사이클 최종 완료보고 전에만 읽는다. 기존 두 흐름 중 개발·독립 검수·main 완료보고에 통합하며 별도 감사 흐름을 만들지 않는다. 시작·일반 개발·개별 task 완료마다 반복하거나 계속 전수감사를 수행하지 않는다.
+Read only after development ends and before the cycle's final completion report. Integrate this checklist into implementation, independent review, and main's completion report within the existing two workflows. Do not create a separate audit workflow, repeat it at startup/during ordinary development/at each task completion, or run continuous exhaustive audits.
 
-상시 역할 정책은 적용되는 AGENTS.md를 전제로 한다.
+Ongoing role policy is supplied by the applicable AGENTS.md.
 
-## 고정 대상과 검수
+## Fixed target and review
 
-- 승인된 spec version·완료기준, 이번 cycle의 변경 파일과 직접 관련 부분, 최종 고정 산출물의 해시 또는 revision, 검증 근거·제한을 확인한다. 기존 packet·checkpoint·diff와 필요한 원자료만 사용하고 검토 범위·미검수 부분·미확인을 명시한다.
-- 구현자와 다른 비판적 reviewer가 그 고정 최종본을 검수한다. 항목마다 별도 에이전트 다섯 명을 강제하지 않는다. 필요한 도구가 없으면 관련 검수만 대기하고 제한을 보고한다.
-- 최초 검수 전에 구현자의 자기평가·사고과정이나 다른 독립 reviewer의 결론으로 검토를 유도하지 않는다. reviewer는 승인 명세·고정 산출물·검증 근거를 직접 대조한다. 대상이 바뀌면 최신 해시 또는 revision으로 영향받는 검수를 갱신하고 과거 통과를 승계하지 않는다.
-- main은 reviewer 의견을 명세·고정 증거에 대조하고 중복·영향·우선순위를 정리한다. 사용자는 운영자로서 개선 채택·필요 결정을 판단한다.
+- Confirm the approved spec version/completion criteria, this cycle's changed files and directly related areas, the final fixed artifact hash or revision, and verification evidence/limits. Use existing packets/checkpoints/diffs and only necessary raw material. State the review scope, unreviewed areas, and unverified matters.
+- A critical reviewer other than the implementer reviews that fixed final version. Do not require five separate agents, one per checklist item. If necessary tools are unavailable, hold only the affected review and report the limitation.
+- Do not steer the initial review with the implementer's self-assessment/thought process or other independent reviewers' conclusions. The reviewer directly compares the approved specification, fixed artifacts, and verification evidence. If the target changes, refresh affected reviews against the latest hash or revision; do not carry forward an earlier pass.
+- Main compares reviewer opinions with the specification/fixed evidence and consolidates duplicates, impact, and priorities. The user, as operator, decides which improvements to adopt and resolves necessary decisions.
 
-## 다섯 항목
+## Five items
 
-다섯 항목을 모두 검토하되 이번 변경과 직접 관련 부분부터 살핀다. 항목마다 관찰·추론·미확인을 구분한다. 길이·호출 횟수·의존 깊이만으로 불량을 판정하지 않는다. 관찰된 문제가 없으면 `없음(미관찰)`, 근거가 부족하거나 해당 자료가 없으면 그 범위와 `미확인`을 남기며 문제를 만들어 채우지 않는다.
+Review all five items, starting with areas directly related to this change. For each, distinguish observed, inferred, and unverified findings; use equivalent labels in the chosen report language. Length, call count, or dependency depth alone does not establish a defect. Use `none (not observed)` when no problem was observed; when evidence is insufficient or material is absent, state that scope and `unverified`. Do not invent problems to fill the checklist.
 
-| 항목 | 판단할 내용과 근거 |
+| Item | Assessment and evidence |
 | --- | --- |
-| 컨텍스트 | 불필요한 반복 투입, 오래된 결정/spec, 무관 참조, 분리 가능한 자료가 실제 작업에 미친 영향. 사용한 지침·참조 구간과 checkpoint를 확인하고 필요한 정보만 본문에, 특정 상황의 상세만 참조에 둘 후보를 판단한다. |
-| 반복 호출 역할의 하네스 편입 후보 | 반복된 역할의 출처 task, 입력·출력, 실제 효용·비용 근거를 확인한다. 반복 횟수만으로 편입을 결정하지 않고 재사용할 지침·skill·자료 후보와 선택 이유를 제시한다. 자동 편입·새 runner/hooks 구축을 지시하지 않는다. |
-| 의존성 | 코드·패키지·작업 의존의 깊이, 순환, 불필요한 결합, 변경 파급, 병목을 관련 파일·deps·검증 증거와 대조한다. 깊이가 필요 기능을 위해 정당한지와 실제 영향을 판단하고 무관한 전체 저장소 조사로 넓히지 않는다. |
-| 파일 인덱싱 | 관련 파일과 정본, 진입점·참조의 발견성·최신성, 끊긴 연결이나 오래된 경로가 인계·재개에 미친 영향을 확인한다. 기존 파일·문서·검색 수단으로 판단하며 새 검색 DB나 완전 수동 전파일 목록 구축을 지시하지 않는다. |
-| 코드 품질 | 승인 명세 위반, 오류 처리, 중복, 과도한 추상화, 검증 부족과 실패 처리를 이번 변경·직접 관련 코드·검증 근거에서 확인한다. 코드나 실제 UI가 없으면 해당 기능·시각·접근성 검증을 수행했다고 주장하지 않고 한계를 남긴다. |
+| Context | Assess how unnecessary repeated loading, stale decisions/specs, unrelated references, and separable materials affected actual work. Check the instructions/reference sections and checkpoints used. Identify candidates for keeping essential information in the body and situational detail in references. |
+| Repeated roles as candidates for harness inclusion | Check each repeated role's source task, inputs/outputs, and evidence of actual value/cost. Do not decide inclusion from repetition count alone; propose reusable instructions/skills/materials with reasons. Do not direct automatic inclusion or construction of new runners/hooks. |
+| Dependencies | Compare depth, cycles, unnecessary coupling, change propagation, and bottlenecks in code/package/task dependencies with related files, deps, and verification evidence. Assess whether depth is justified by required functionality and its actual impact; do not expand into an unrelated repository-wide investigation. |
+| File indexing | Check relevant files/canonical sources, entrypoint/reference discoverability and freshness, and how broken links or stale paths affected handoff/resumption. Use existing files, documents, and search tools; do not direct creation of a new search database or a fully manual inventory of every file. |
+| Code quality | Examine violations of the approved specification, error handling, duplication, excessive abstraction, insufficient verification, and failure handling in this change, directly related code, and verification evidence. If original code and a test variant were compared, check the worker's pre-comparison source/build settings/executable or artifact provenance, evidence of necessary build directory separation, and verification limits. Without code or an actual UI, state the limits and do not claim functional, visual, or accessibility verification was performed. |
 
-## 발견과 완료 판단
+## Findings and completion assessment
 
-각 발견에는 `항목 / 관찰·추론·미확인 / 출처 task·파일 / 근거 / 영향 / 우선순위 / 선택 개선안·필요 결정 / 영향받는 task`를 남긴다. 긴 원자료 대신 안전한 파일·구간 참조를 사용한다.
+For each finding, record `item / observed·inferred·unverified / source task·file / evidence / impact / priority / optional improvement·required decision / affected task`. Use safe file/section references rather than lengthy raw material.
 
-- **완료 차단 결함:** 사전에 합의한 완료기준의 실제 결함이나 요구된 검증의 부족을 해당 기준·증거·영향 task에 연결한다. main이 대조하고 승인된 범위에서 담당 worker에게 처리할 작업을 인계한다. 수정 후 최신 고정본에 대한 영향받는 독립 검수를 갱신한다.
-- **사용자 판단 필요·미확인:** 기준이 미합의이거나 증거가 부족해 결론을 낼 수 없으면 그 한계를 명시하고 main이 필요한 사용자 판단을 요청한다. 합의된 필수 검증의 부족인지도 구분하며 임의 통과·실패로 승격하지 않는다. 영향받는 작업과 독립적으로 계속할 작업을 구분한다.
-- **다음 cycle 개선:** 일반 개선은 종료를 무기한 막지 않는다. main이 중복·영향·우선순위를 정리하고 사용자가 채택을 결정한다. 채택은 구현·하네스 편입·설치·외부 쓰기·자동 메모리 활성화 승인이 아니다. 후속 명세·write set·worker·독립 검수와 행위별 권한 없이 자동 수정하지 않는다.
+- **Completion-blocking defect:** Link actual defects against previously agreed completion criteria, or missing required verification, to the criteria, evidence, and affected tasks. Main compares the evidence and hands corrective work to the responsible worker within the approved scope. After correction, refresh affected independent reviews against the latest fixed version.
+- **User decision needed / unverified:** If criteria are not agreed or evidence is insufficient for a conclusion, state the limit and let main request the necessary user decision. Distinguish this from missing agreed mandatory verification; do not arbitrarily promote it into a pass or failure. Identify affected work and work that can continue independently.
+- **Next-cycle improvement:** General improvements do not block closure indefinitely. Main consolidates duplicates, impact, and priority; the user decides adoption. Adoption does not authorize implementation, harness inclusion, installation, external writes, or automatic memory activation. Do not modify automatically without a subsequent specification, write set, worker, independent review, and authority for each action.
 
-## 완료보고에 연결
+## Connect to the completion report
 
-종료 점검 결과에 cycle·spec version·최신 고정 대상 식별, 다섯 항목의 검토 범위·근거·미검수·미확인, 완료 차단 결함과 다음 cycle 개선, 독립 reviewer의 검수 대상·제한, main의 증거 대조, 운영자 결정 또는 미결정을 연결한다. 상세 증거는 기존에 합의한 repo 밖 기록 root와 허용 write set을 따른다. 기록 위치가 미합의면 대화에 남기며 임의로 파일을 만들지 않는다.
+Connect checklist results to the cycle, spec version, latest fixed target identifier, review scope/evidence/unreviewed and unverified areas for all five items, completion-blocking defects and next-cycle improvements, the independent reviewer's target/limits, main's evidence comparison, and operator decisions or unresolved decisions. Detailed evidence follows the agreed record root outside the repository and allowed write set. If the record location is not agreed, leave it in the conversation rather than creating files arbitrarily.
 
-결과를 기존 필수 짧은 소절인 `필요·불편`, `하네스`, `에이전트 메모리 관리`에 통합한다. 별도 상세 보고서 세 개를 추가 강제하지 않는다. 개인 memory·인증 파일·전체 프롬프트·비밀값·개인정보 원문·개인 순위·숨겨진 사고과정을 수집하지 않는다. 실제 사용이 확인된 지속기억의 안전한 출처 참조만 쓰고 자동 메모리의 상태·사용·효과를 추정하지 않는다.
+Integrate results into the existing required brief sections: `Needs and friction`, `Harness`, and `Agent memory management`, using the user's explicit preferred output language or otherwise the conversation's language. Do not require three additional detailed reports. Do not collect personal memory/authentication files, full prompts, secrets, raw personal information, individual rankings, or hidden thought processes. Use only safe source references for persistent memory whose actual use is confirmed; do not infer automatic memory's state, use, or effects.
 
-문서 작성과 절차 점검을 실제 사이클 검사·제품 테스트·skill 자동 로딩 또는 자동 강제의 실행 증거로 주장하지 않는다. 종료 점검 완료도 사용자 수용·Issue 종료·commit/push/PR/merge·설치 승인을 뜻하지 않는다.
+Do not present document drafting or procedural checking as execution evidence for actual cycle checks, product tests, automatic skill loading, or automatic enforcement. Completing this checklist does not constitute user acceptance, Issue closure, or authorization for commit/push/PR/merge or installation.
