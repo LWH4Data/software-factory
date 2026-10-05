@@ -27,7 +27,24 @@ Suppose a project's user has explicitly approved rejecting unsupported input bef
 | Worker → reviewer | Fixed change identifiers link the validation path to `R1`/`D1`. For that same target, the record might show the unsupported-input check **passed**, a supported-input regression check **failed**, and required CI **unverified/not run** because authorized execution was unavailable. Preserve the actual commands, outcomes, and decisive raw evidence behind each status. |
 | Reviewer → main | A different actual executor examines the fixed changes and evidence, including the failed check and unrun gate. Main compares them with `R1`; the affected completion criteria remain unmet or unverified. Links and summaries index the evidence, not proof, enforcement, or substitutes for it. |
 
-Choose working methods for the task. TDD's test-first/red-green-refactor can help when a meaningful executable test can express the intended behavior; it is not required for every edit or every agent microstep. Requirements-engineering or specification-driven development (SDD) techniques may clarify ambiguous behavior, but do not require a fixed up-front design or a methodology document bundle. Mermaid/UML diagrams are useful only when they clarify state, sequence, interfaces, or responsibility. Reuse the canonical specification and decisions rather than duplicating them in each format. If a discovery changes intended behavior or acceptance, follow the existing specification/version/approval policy; ordinary corrections within the approved contract follow existing authority and retry limits.
+Choose working methods for the task. TDD's test-first/red-green-refactor can help when a meaningful executable test can express the intended behavior; it is not required for every edit or every agent microstep. Requirements-engineering or specification-driven development (SDD) techniques may clarify ambiguous behavior, but do not require a fixed up-front design or a methodology document bundle. Mermaid follows the specification default in Workflow 1; UML remains optional when it clarifies state, sequence, interfaces, or responsibility. Reuse the canonical specification and decisions rather than duplicating them in each format. If a discovery changes intended behavior or acceptance, follow the existing specification/version/approval policy; ordinary corrections within the approved contract follow existing authority and retry limits.
+
+### Specification diagram example
+
+Choose a compact Mermaid type that fits the specification: a flowchart for behavior, a sequence diagram for interactions, or a state diagram for transitions. Show the relevant relationships rather than copying the entire specification or historical logs. Meaningful specification changes update the affected diagram consistently; ordinary conversations do not require blanket regeneration.
+
+This flowchart illustrates the approved `R1` intent above and `D1`'s validation-before-mutation choice: reject unsupported input before changing stored data. It describes the illustrative specification, not a new product requirement or evidence that implementation passed.
+
+```mermaid
+flowchart TD
+    Input["Input: illustrative approved R1 / D1"] --> Validate{"Input supported?"}
+    Validate -->|No| Reject["Reject; stored data unchanged"]
+    Validate -->|Yes| Mutate["Change stored data"]
+```
+
+The rejection branch leaves stored data unchanged; the supported branch permits mutation after validation. Diagrams complement canonical Markdown requirements, constraints, acceptance criteria, and decisions; they neither replace them nor authorize implementation or approval. For an unapproved draft, label the diagram's intent proposed. Keep unresolved details explicitly unknown/proposed, with their questions in canonical Markdown; do not invent design to fill a diagram or promote its status to approved.
+
+Authoring Mermaid source and rendering it are separate. Preserve the fenced source in Markdown. If display rendering is unavailable or unverified, provide that source and a brief prose explanation without claiming a rendered image or parser validation, or an inability to author diagrams. Do not install tools merely to satisfy the specification default.
 
 ## Bounded evidence
 

@@ -22,6 +22,8 @@ Use the user's explicit preferred output language; otherwise use the conversatio
 
 Start with the user's natural-language request. Main clarifies meaningful behavior, constraints, representative success/failure cases, and decisions, then records the agreed intent in canonical Markdown specifications and decisions; do not require the user to fill out a methodology form. Read only needed portions of the goal and existing decisions, then agree on the following. Record unresolved matters as questions with affected tasks/deps. Do not promote proposals, assumptions, or review opinions into approvals.
 
+When drafting, substantively updating, or explaining a project specification, include a small, readable Mermaid diagram by default alongside the canonical Markdown requirements, constraints, acceptance criteria, and decisions. Base it on that specification's behavior, flow, state, interfaces, or responsibilities; honor explicit user format/no-diagram preferences and original project instructions. Read the [specification diagram example](references/operating-examples.md#specification-diagram-example) for compact source, status labels, and rendering limits. Ordinary progress messages, raw logs, and internal packets do not each require a diagram.
+
 | Specification item | Agreement needed |
 | --- | --- |
 | Goal, scope, exclusions | Problem to solve, current targets, and exclusions |
