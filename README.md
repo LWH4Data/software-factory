@@ -1,8 +1,8 @@
 # Software Factory
 
-A Codex plugin for specification agreement with the user, implementation, independent review, and completion reporting. Plugin name: `software-factory`; marketplace: `software-factory-local`; package version: `0.1.3`. Public source repository: [LWH4Data/software-factory](https://github.com/LWH4Data/software-factory).
+A Codex plugin for specification agreement with the user, implementation, independent review, and completion reporting. Plugin name: `software-factory`; marketplace: `software-factory-local`; package version: `0.1.4`. Public source repository: [LWH4Data/software-factory](https://github.com/LWH4Data/software-factory).
 
-These files are the 0.1.3 release source for the English canonical instructions. Publication and installation updates require target-specific authorization and review. Source availability alone does not establish deployment, installation, actual skill loading, or runtime verification. See the [한국어 사용 안내](README.ko.md) for Korean usage guidance. English instructions do not set the response language: outputs follow the user's explicit language preference, or otherwise the conversation's language.
+These files are the 0.1.4 release source for the English canonical instructions. Publication and installation updates require target-specific authorization and review. Source availability alone does not establish deployment, installation, actual skill loading, or runtime verification. See the [한국어 사용 안내](README.ko.md) for Korean usage guidance. English instructions do not set the response language: outputs follow the user's explicit language preference, or otherwise the conversation's language.
 
 ## Two workflows and roles
 

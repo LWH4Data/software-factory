@@ -16,9 +16,30 @@ A worker is being replaced while still writing. Main first confirms the old owne
 
 If the tool provides no executor ID, record `not provided`, an observable execution reference, and main's assignment basis. Do not use a fabricated UUID or nickname as identity/independence evidence. Ask main only if responsibility, overlap, or independence remains unclear. A former implementer renamed or assigned the reviewer role still cannot independently review their own artifact.
 
+### Collaboration trace and methods
+
+Suppose a project's user has explicitly approved rejecting unsupported input before changing stored data. The following trace is illustrative, not a new product requirement or a report of checks performed. `R1` and `D1` are local example labels; use existing project labels when available.
+
+| Collaboration boundary | Link through existing records |
+| --- | --- |
+| User → main | The approved Markdown specification records `R1`, its success/failure cases, and constraints. Decision `D1` selects validation before mutation over relying on rollback: it avoids rollback complexity but adds a validation path. |
+| Main → worker | The existing packet assigns the actual executor and allowed files. `acceptance` links `R1` and the check plan; `deps` links `D1` and applicable policies; `evidence` points to the current checkpoint. No extra packet fields are needed. |
+| Worker → reviewer | Fixed change identifiers link the validation path to `R1`/`D1`. For that same target, the record might show the unsupported-input check **passed**, a supported-input regression check **failed**, and required CI **unverified/not run** because authorized execution was unavailable. Preserve the actual commands, outcomes, and decisive raw evidence behind each status. |
+| Reviewer → main | A different actual executor examines the fixed changes and evidence, including the failed check and unrun gate. Main compares them with `R1`; the affected completion criteria remain unmet or unverified. Links and summaries index the evidence, not proof, enforcement, or substitutes for it. |
+
+Choose working methods for the task. TDD's test-first/red-green-refactor can help when a meaningful executable test can express the intended behavior; it is not required for every edit or every agent microstep. Requirements-engineering or specification-driven development (SDD) techniques may clarify ambiguous behavior, but do not require a fixed up-front design or a methodology document bundle. Mermaid/UML diagrams are useful only when they clarify state, sequence, interfaces, or responsibility. Reuse the canonical specification and decisions rather than duplicating them in each format. If a discovery changes intended behavior or acceptance, follow the existing specification/version/approval policy; ordinary corrections within the approved contract follow existing authority and retry limits.
+
 ## Bounded evidence
 
 A lookup returns the wrong path or a field that is absent in the actual source. Discover the relevant source, inspect the necessary section or field, then cite its safe fixed identifier and location. On a path or field error, simplify the lookup and confirm the actual source before narrowing again. Preserve conditions that change the conclusion and relevant contrary evidence in the cited section. Short output alone does not establish correctness; a bounded excerpt that omits a decisive condition is insufficient. Use the project's source and evidence conventions without imposing common tool syntax or an output cap.
+
+### Project quality checks
+
+Reuse applicable project checks and agree their tools, versions/configuration, scope/baseline, thresholds, blocking conditions, and justified exceptions in the existing project specification/decisions and packet `acceptance`. For example, fast local lint/type checks and relevant tests may accompany development, with heavier CI or Sonar analysis at an appropriate boundary. This is an example, not a universal schedule, tool mandate, or package-owned execution framework. Concrete commands, paths, log formats, credentials, and service choices stay project-local; do not collect secrets in shared evidence.
+
+Record actual results against the same fixed source/build/configuration target given to independent review and main. Distinguish passed checks, failed checks, and unverified/not-run checks; prepared commands or a link to CI do not establish execution. When relevant, distinguish a completed CI scan from its quality-gate outcome. Preserve preparation/partial failures and unrun gates under the existing retry/stop policy. A required CI check that cannot run leaves its affected completion criterion unverified. Specification approval does not supply separate CI/setup execution authority, or authorize automatic push/merge.
+
+Use the agreed baseline to distinguish previous issues from introduced or affected issues, while retaining relevant existing defects in assessment. If origin or change impact is unclear, say so; do not silently exclude an existing defect that undermines an approved behavior. Scores, coverage, and static lint results alone cannot establish correctness, user acceptance, or permission. Do not weaken checks, suppress findings, or change acceptance to improve a score. Any necessary contract, threshold, exception, environment, or authority change follows the project's existing decision/approval policy rather than being hidden in a check result. These records establish no general efficiency, learning, or behavioral effect.
 
 ### Human manual QA handoff
 

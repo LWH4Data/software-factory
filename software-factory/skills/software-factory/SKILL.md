@@ -20,7 +20,7 @@ Use the user's explicit preferred output language; otherwise use the conversatio
 
 ## Workflow 1: Draft the specification with the user
 
-Main reads only the needed portions of the current goal and existing decisions, then agrees on the following with the user. Record unresolved matters as questions with affected tasks/deps. Do not promote proposals, assumptions, or review opinions into approvals.
+Start with the user's natural-language request. Main clarifies meaningful behavior, constraints, representative success/failure cases, and decisions, then records the agreed intent in canonical Markdown specifications and decisions; do not require the user to fill out a methodology form. Read only needed portions of the goal and existing decisions, then agree on the following. Record unresolved matters as questions with affected tasks/deps. Do not promote proposals, assumptions, or review opinions into approvals.
 
 | Specification item | Agreement needed |
 | --- | --- |
@@ -50,9 +50,13 @@ Keep the verification plan and approved stop-policy reference in `acceptance`; l
 
 Workers/reviewers read original instructions → their own packet → relevant records/checkpoint → approved specification version and decisions → necessary files/evidence. Load only relevant files/sections of specifications, decisions, and evidence into context; do not repeatedly load entire conversations, AGENTS histories, or source collections. These fields define handoffs, not product APIs, databases, or Issue state models.
 
+At collaboration boundaries, link accepted intent and selection rationale/tradeoffs to responsibility, fixed changes, and actual validation status/evidence through existing specifications, decisions, packets, and checkpoints. Reuse existing labels or suitable local identifiers. For an illustrative trace or selection of working methods, read [collaboration trace and methods](references/operating-examples.md#collaboration-trace-and-methods); it adds no universal ID scheme or mandatory document bundle.
+
 Read only the relevant [operating example](references/operating-examples.md): [current state](references/operating-examples.md#current-state) when locating or updating current canonical pointers; [bounded evidence](references/operating-examples.md#bounded-evidence) when narrowing a lookup or recovering from a path/field error; [failure and resumption](references/operating-examples.md#failure-and-resumption) when a stage fails or work resumes with incomplete checks.
 
 When approved acceptance includes user manual verification, read the [human manual QA handoff example](references/operating-examples.md#human-manual-qa-handoff).
+
+Reuse applicable project checks against approved acceptance and the same fixed target. When planning or assessing local, CI, or static quality evidence, read [project quality checks](references/operating-examples.md#project-quality-checks). Agree the project-specific check contract and needed execution/setup authority; required checks that cannot run remain unverified. Metrics alone do not establish acceptance or permission.
 
 - Workers change only allowed files and return verification evidence against acceptance criteria, including limits from checks not run. Link actual blockers to the task's questions, evidence, and affected deps; hold only that work. General needs/friction do not automatically stop development; report them at completion.
 - Workers may correct ordinary implementation or authorized preparation errors within the approved goal, behavior/API contract, acceptance criteria, write set, and action authority. Main coordinates work and affected independent review without reapproving every small correction. Contract/acceptance changes, outside-write changes, new external actions, or environment/tool changes requiring separate project approval go to the relevant decision-maker. Preserve technical permission requirements and retry limits; never weaken an oracle/test criterion to hide a contract violation.
