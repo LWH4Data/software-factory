@@ -4,11 +4,11 @@ Read after development ends and before the cycle's final report. Integrate five 
 
 ## Fixed target and review
 
-Confirm approved spec/completion criteria, changed files/directly related areas, final hash or revision, and actual verification evidence/limits. State scope, unreviewed areas, and unverified matters. A different actual executor reviews that fixed version without author self-assessment/thought processes or other reviewers' initial conclusions. Missing tools holds affected review; changed targets require refreshed affected review. Main compares opinions with spec/evidence and consolidates impact/priorities; the user decides improvement adoption.
+Confirm approved spec/completion criteria, changed files/directly related areas, final hash or revision, and actual verification evidence/limits. State scope, unreviewed areas, and unverified matters. A different actual executor reviews that fixed version without author self-assessment/thought processes or other reviewers' initial conclusions. Missing tools holds affected review; changed targets require refreshed affected review. Main reconciles review with spec/evidence under the [proportionate verification and review](../SKILL.md#proportionate-verification-and-review) rule and consolidates impact/priorities; the user decides improvement adoption.
 
 ## Five items
 
-Assess all five, beginning with change-related areas. Distinguish observed, inferred, and unverified findings; `none (not observed)` differs from insufficient evidence/`unverified` and from verified absence. Length, repetition, or dependency depth alone proves no defect. Invent no findings.
+Assess all five briefly within the changed scope, using relevant valid evidence; record a short not-applicable or limit reason where justified. No standalone full audit/test is needed for each item. Distinguish observed, inferred, and unverified findings; `none (not observed)` differs from insufficient evidence/`unverified` and from verified absence. Length, repetition, or dependency depth alone proves no defect. Invent no findings.
 
 | Item | Relevant evidence and assessment |
 | --- | --- |
@@ -22,7 +22,7 @@ Without code or actual UI, state limits and claim no functional/visual/accessibi
 
 ## Findings and completion assessment
 
-For each finding, record item, observation status, source task/file, safe evidence reference, impact/priority, optional improvement or required decision, and affected task.
+For each finding, return item, observation status, source task/file, safe evidence reference, impact/priority, optional improvement or required decision, and affected task for main's current cycle-file assessment.
 
 - **Completion blocker:** Link defects or missing agreed mandatory checks to acceptance/evidence/tasks. Main assigns authorized correction to the worker; refresh affected review for the new target under the approved stop policy.
 - **Decision needed/unverified:** Unagreed criteria or insufficient evidence needs a stated limit and main's necessary decision request, not an arbitrary pass/failure. Identify affected and independent work.
@@ -30,8 +30,8 @@ For each finding, record item, observation status, source task/file, safe eviden
 
 ## Connect to the completion report
 
-Link cycle/spec, latest fixed target, all five items' scope/evidence/limits, blockers/improvements, independent reviewer target/limits, main comparison, and operator decisions/unresolved matters. Keep detail in the agreed outside-repository record root/write set; absent agreement, use conversation.
+Link cycle/spec, latest fixed target, all five items' scope/evidence/limits, blockers/improvements, independent reviewer target/limits, main comparison, and operator decisions/unresolved matters. Main updates the agreed project-local cycle file under the [shared record and lifecycle rules](../SKILL.md#shared-boundaries-and-records); workers/reviewers return facts without separate reports. Unknown/conflicting path or ownership holds affected record work; pending drafts stay in conversation, with no external-root fallback. Stable technical completion leads to user review; keep the file until explicit acceptance of that completed cycle/fixed target permits exact-file removal.
 
 Apply the existing [brief report and privacy rules](../SKILL.md#required-brief-sections-in-completion-reports): Needs and friction, Harness, Agent memory management. No extra report bundle.
 
-Document/static checks prove no runtime/model behavior, efficiency gain, parser/display rendering, automatic skill loading, or enforcement. Checklist completion grants no user acceptance, Issue closure, Git commit/push/PR/merge, or installation authority.
+Document/static checks prove no runtime/model behavior, efficiency gain, parser/display rendering, automatic skill loading, or enforcement. Checklist completion grants no user acceptance, cycle-file deletion, Issue closure, Git commit/push/PR/merge, or installation authority.

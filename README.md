@@ -1,15 +1,15 @@
 # Software Factory
 
-A Codex plugin for specification agreement with the user, implementation, independent review, and completion reporting. Plugin name: `software-factory`; marketplace: `software-factory-local`; package version: `0.1.6`. Public source repository: [LWH4Data/software-factory](https://github.com/LWH4Data/software-factory).
+A Codex plugin for specification agreement with the user, implementation, independent review, and completion reporting. Plugin name: `software-factory`; marketplace: `software-factory-local`; package version: `0.1.7`. Public source repository: [LWH4Data/software-factory](https://github.com/LWH4Data/software-factory).
 
-These files are the 0.1.6 release source for the English canonical instructions. Publication and installation updates require target-specific authorization and review. Source availability alone does not establish deployment, installation, actual skill loading, or runtime verification. See the [한국어 사용 안내](README.ko.md) for Korean usage guidance. English instructions do not set the response language: outputs follow the user's explicit language preference, or otherwise the conversation's language.
+These files are the 0.1.7 release source for the English canonical instructions. Publication and installation updates require target-specific authorization and review. Source availability alone does not establish deployment, installation, actual skill loading, or runtime verification. See the [한국어 사용 안내](README.ko.md) for Korean usage guidance. English instructions do not set the response language: outputs follow the user's explicit language preference, or otherwise the conversation's language.
 
 ## Two workflows and roles
 
-1. The user and main agree on goals, scope, exclusions, completion criteria, write authority, record location, specification version, and the cycle scope/completion boundary. Agree on an end date only when needed; no fixed cadence is assumed.
+1. The user and main agree on goals, scope, exclusions, completion criteria, write authority, the inside-project cycle-file path/identity and sole writer, specification version, and the cycle scope/completion boundary. Agree on an end date only when needed; no fixed cadence is assumed.
 2. Under the approved specification, a worker develops allowed files and a reviewer other than the implementer reviews the fixed artifacts. Main compares the specification and evidence, then reports results.
 
-Version 0.1.6 defaults to complementary compact views when drafting, substantively updating, or explaining specifications or major design: an overview of components/responsibilities/flow paired with a relevant UML-style class, sequence, or state view, using Mermaid where suitable. Keep both with the same canonical Markdown specification/version and consistent status; honor user format preferences and explain an omitted redundant view. See the [paired-view example](software-factory/skills/software-factory/references/operating-examples.md#specification-diagram-example) for source and verification limits. Instructions have been trimmed while retaining the two workflows, role/authority boundaries, and brief report sections; load only situational references needed for the task. Static source checks establish neither model behavior nor efficiency gains.
+Version 0.1.7 defaults to complementary compact views when drafting, substantively updating, or explaining specifications or major design: an overview of components/responsibilities/flow paired with a relevant UML-style class, sequence, or state view, using Mermaid where suitable. Keep both with the same canonical Markdown specification/version and consistent status; honor user format preferences and explain an omitted redundant view. See the [paired-view example](software-factory/skills/software-factory/references/operating-examples.md#specification-diagram-example) for source and verification limits. Instructions have been trimmed while retaining the two workflows, role/authority boundaries, and brief report sections; load only situational references needed for the task. Static source checks establish neither model behavior nor efficiency gains.
 
 Main handles agreement, assignments, decision records, integrated assessment, and reporting; workers write product code, tests, and configuration. Only main creates additional agents; workers/reviewers must not delegate again or substitute a new Codex chat. If required multi-agent tools are unavailable, hold the affected implementation/review and report the limitation. Original project instructions take priority.
 
@@ -23,7 +23,13 @@ Only after development ends and before the cycle's final completion report, read
 
 ## Reports and records
 
-Completion reports include results, spec version, changed files, verification limits, unresolved questions, next action, ownership, and these brief sections, with equivalent headings in the chosen output language:
+Use one collaboration Markdown file per cycle inside the project, default `SOFTWARE_FACTORY.<cycle>.md`. Agree its relative path, cycle identity and sole writer (main by default); resolve the inside-project boundary and protect unrelated existing same-name files. Workers/reviewers read relevant current state and return facts for main integration; serialize record ownership. Conflicting/unknown path or authority holds affected work, with no external-root fallback or unapproved overwrite. Original project instructions still take priority.
+
+Main updates current spec/approval/decisions, ten-field assignments, checkpoints, fixed-target commands/outcomes/evidence/limits and completion assessments in this file, rather than accumulating per-role reports, duplicate full histories, archives, secondary indices/logs or permanent all-cycle state. Keep unresolved decisions/blockers, failed/unrun mandatory checks, relevant failure totals, retry/STOP/restart constraints and decisive contrary/QA evidence until user acceptance. Existing safe evidence/logs may be referenced; insufficient raw proof stays unverified. Existing external history is neither migrated nor deleted.
+
+After approved implementation, mandatory verification, different independent review and main comparison resolve blocking matters, submit the completed cycle/fixed target and limits to the user. Only explicit acceptance of that completed cycle/target permits removal of the agreed literal cycle file after a fresh identity/inside-project path check, within applicable permissions/STOP policy. Internal PASS, initial spec approval, silence, unrelated acknowledgment, partial or unclear acceptance keeps the file. No directory/glob, product/log/history cleanup, archive/migration, Git or installation authority follows; report cleanup failure without automatic destructive retries. See the [current-state example](software-factory/skills/software-factory/references/operating-examples.md#current-state) for lightweight collaboration and serialized handoff.
+
+The current completion assessment and user report include results, spec version, changed files, verification limits, unresolved questions, next action, ownership, and these brief sections, with equivalent headings in the chosen output language:
 
 - **Needs and friction:** Main consolidates tasks, evidence, impact, and optional improvements; the user decides adoption. Only actual blockers hold the affected work.
 - **Harness:** Report observed gaps, conflicts, failures, or update needs in instructions, skills, tools, verification, and environments actually used.
@@ -48,7 +54,7 @@ requirements-dev.txt
 .gitattributes
 ```
 
-Exclude project operational records, development artifacts, virtual environments, authentication material, secrets, environment files, and temporary files. `.gitignore` allows only the files above; inspect forced additions and already tracked files separately. `.gitattributes` disables text line-ending conversion for the five package files. In the first specification, agree on a project-specific absolute record root outside the product repository and confirm its actual location is outside it. The installation cache is not a record root.
+Exclude project operational records, development artifacts, virtual environments, authentication material, secrets, environment files, and temporary files. `.gitignore` allows only the files above; inspect forced additions and already tracked files separately. `.gitattributes` disables text line-ending conversion for the five package files. The agreed cycle file stays inside its project and outside this separate distribution root/allowlist; installation caches are not collaboration-file locations.
 
 ## Install from a reviewed commit
 
