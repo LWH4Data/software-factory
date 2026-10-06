@@ -1,40 +1,37 @@
 # Cycle close checklist
 
-Read only after development ends and before the cycle's final completion report. Integrate this checklist into implementation, independent review, and main's completion report within the existing two workflows. Do not create a separate audit workflow, repeat it at startup/during ordinary development/at each task completion, or run continuous exhaustive audits.
-
-Ongoing role policy is supplied by the applicable AGENTS.md.
+Read after development ends and before the cycle's final report. Integrate five items into existing independent review and main assessment; no separate audit workflow, startup/task repetition, or agent per item. Applicable original project instructions and SKILL role/authority rules still govern.
 
 ## Fixed target and review
 
-- Confirm the approved spec version/completion criteria, this cycle's changed files and directly related areas, the final fixed artifact hash or revision, and verification evidence/limits. Use existing packets/checkpoints/diffs and only necessary raw material. State the review scope, unreviewed areas, and unverified matters.
-- A critical reviewer other than the implementer reviews that fixed final version. Do not require five separate agents, one per checklist item. If necessary tools are unavailable, hold only the affected review and report the limitation.
-- Do not steer the initial review with the implementer's self-assessment/thought process or other independent reviewers' conclusions. The reviewer directly compares the approved specification, fixed artifacts, and verification evidence. If the target changes, refresh affected reviews against the latest hash or revision; do not carry forward an earlier pass.
-- Main compares reviewer opinions with the specification/fixed evidence and consolidates duplicates, impact, and priorities. The user, as operator, decides which improvements to adopt and resolves necessary decisions.
+Confirm approved spec/completion criteria, changed files/directly related areas, final hash or revision, and actual verification evidence/limits. State scope, unreviewed areas, and unverified matters. A different actual executor reviews that fixed version without author self-assessment/thought processes or other reviewers' initial conclusions. Missing tools holds affected review; changed targets require refreshed affected review. Main compares opinions with spec/evidence and consolidates impact/priorities; the user decides improvement adoption.
 
 ## Five items
 
-Review all five items, starting with areas directly related to this change. For each, distinguish observed, inferred, and unverified findings; use equivalent labels in the chosen report language. Length, call count, or dependency depth alone does not establish a defect. Use `none (not observed)` when no problem was observed; when evidence is insufficient or material is absent, state that scope and `unverified`. Do not invent problems to fill the checklist.
+Assess all five, beginning with change-related areas. Distinguish observed, inferred, and unverified findings; `none (not observed)` differs from insufficient evidence/`unverified` and from verified absence. Length, repetition, or dependency depth alone proves no defect. Invent no findings.
 
-| Item | Assessment and evidence |
+| Item | Relevant evidence and assessment |
 | --- | --- |
-| Context | Assess how unnecessary repeated loading, stale decisions/specs, unrelated references, and separable materials affected actual work. Check the instructions/reference sections and checkpoints used. Identify candidates for keeping essential information in the body and situational detail in references. |
-| Repeated roles as candidates for harness inclusion | Check each repeated role's source task, inputs/outputs, and evidence of actual value/cost. Do not decide inclusion from repetition count alone; propose reusable instructions/skills/materials with reasons. Do not direct automatic inclusion or construction of new runners/hooks. |
-| Dependencies | Compare depth, cycles, unnecessary coupling, change propagation, and bottlenecks in code/package/task dependencies with related files, deps, and verification evidence. Assess whether depth is justified by required functionality and its actual impact; do not expand into an unrelated repository-wide investigation. |
-| File indexing | Check relevant files/canonical sources, entrypoint/reference discoverability and freshness, and how broken links or stale paths affected handoff/resumption. Use existing files, documents, and search tools; do not direct creation of a new search database or a fully manual inventory of every file. |
-| Code quality | Examine violations of the approved specification, error handling, duplication, excessive abstraction, insufficient verification, and failure handling in this change, directly related code, and verification evidence. If original code and a test variant were compared, check the worker's pre-comparison source/build settings/executable or artifact provenance, evidence of necessary build directory separation, and verification limits. Without code or an actual UI, state the limits and do not claim functional, visual, or accessibility verification was performed. |
+| Context | Actual repeated loading, stale specs/decisions, unrelated references, separable materials; body essentials versus conditional references |
+| Repeated roles as harness candidates | Source tasks, inputs/outputs, actual value/cost; reasoned reuse proposals, no automatic inclusion or new runner/hooks |
+| Dependencies | Justified depth, cycles, coupling, change propagation/bottlenecks in related code/package/tasks; no unrelated repository-wide investigation |
+| File indexing | Canonical sources, entrypoint/reference discoverability/freshness, broken links/stale paths affecting handoff/resumption; use existing files/search, no new database/full manual inventory |
+| Code quality | Spec violations, error/failure handling, duplication, abstraction, verification gaps; for original/variant comparisons, pre-comparison source/build/artifact provenance and necessary isolation evidence |
+
+Without code or actual UI, state limits and claim no functional/visual/accessibility checks.
 
 ## Findings and completion assessment
 
-For each finding, record `item / observed·inferred·unverified / source task·file / evidence / impact / priority / optional improvement·required decision / affected task`. Use safe file/section references rather than lengthy raw material.
+For each finding, record item, observation status, source task/file, safe evidence reference, impact/priority, optional improvement or required decision, and affected task.
 
-- **Completion-blocking defect:** Link actual defects against previously agreed completion criteria, or missing required verification, to the criteria, evidence, and affected tasks. Main compares the evidence and hands corrective work to the responsible worker within the approved scope. After correction, refresh affected independent reviews against the latest fixed version.
-- **User decision needed / unverified:** If criteria are not agreed or evidence is insufficient for a conclusion, state the limit and let main request the necessary user decision. Distinguish this from missing agreed mandatory verification; do not arbitrarily promote it into a pass or failure. Identify affected work and work that can continue independently.
-- **Next-cycle improvement:** General improvements do not block closure indefinitely. Main consolidates duplicates, impact, and priority; the user decides adoption. Adoption does not authorize implementation, harness inclusion, installation, external writes, or automatic memory activation. Do not modify automatically without a subsequent specification, write set, worker, independent review, and authority for each action.
+- **Completion blocker:** Link defects or missing agreed mandatory checks to acceptance/evidence/tasks. Main assigns authorized correction to the worker; refresh affected review for the new target under the approved stop policy.
+- **Decision needed/unverified:** Unagreed criteria or insufficient evidence needs a stated limit and main's necessary decision request, not an arbitrary pass/failure. Identify affected and independent work.
+- **Next-cycle improvement:** General improvements do not indefinitely block closure. Main consolidates; user adoption alone authorizes no implementation, harness inclusion, installation, external write, or memory activation. Follow subsequent spec/write set/worker/review/action authority.
 
 ## Connect to the completion report
 
-Connect checklist results to the cycle, spec version, latest fixed target identifier, review scope/evidence/unreviewed and unverified areas for all five items, completion-blocking defects and next-cycle improvements, the independent reviewer's target/limits, main's evidence comparison, and operator decisions or unresolved decisions. Detailed evidence follows the agreed record root outside the repository and allowed write set. If the record location is not agreed, leave it in the conversation rather than creating files arbitrarily.
+Link cycle/spec, latest fixed target, all five items' scope/evidence/limits, blockers/improvements, independent reviewer target/limits, main comparison, and operator decisions/unresolved matters. Keep detail in the agreed outside-repository record root/write set; absent agreement, use conversation.
 
-Integrate results into the existing required brief sections: `Needs and friction`, `Harness`, and `Agent memory management`, using the user's explicit preferred output language or otherwise the conversation's language. Do not require three additional detailed reports. Do not collect personal memory/authentication files, full prompts, secrets, raw personal information, individual rankings, or hidden thought processes. Use only safe source references for persistent memory whose actual use is confirmed; do not infer automatic memory's state, use, or effects.
+Apply the existing [brief report and privacy rules](../SKILL.md#required-brief-sections-in-completion-reports): Needs and friction, Harness, Agent memory management. No extra report bundle.
 
-Do not present document drafting or procedural checking as execution evidence for actual cycle checks, product tests, automatic skill loading, or automatic enforcement. Completing this checklist does not constitute user acceptance, Issue closure, or authorization for commit/push/PR/merge or installation.
+Document/static checks prove no runtime/model behavior, efficiency gain, parser/display rendering, automatic skill loading, or enforcement. Checklist completion grants no user acceptance, Issue closure, Git commit/push/PR/merge, or installation authority.

@@ -1,13 +1,15 @@
 # Software Factory
 
-A Codex plugin for specification agreement with the user, implementation, independent review, and completion reporting. Plugin name: `software-factory`; marketplace: `software-factory-local`; package version: `0.1.5`. Public source repository: [LWH4Data/software-factory](https://github.com/LWH4Data/software-factory).
+A Codex plugin for specification agreement with the user, implementation, independent review, and completion reporting. Plugin name: `software-factory`; marketplace: `software-factory-local`; package version: `0.1.6`. Public source repository: [LWH4Data/software-factory](https://github.com/LWH4Data/software-factory).
 
-These files are the 0.1.5 release source for the English canonical instructions. Publication and installation updates require target-specific authorization and review. Source availability alone does not establish deployment, installation, actual skill loading, or runtime verification. See the [한국어 사용 안내](README.ko.md) for Korean usage guidance. English instructions do not set the response language: outputs follow the user's explicit language preference, or otherwise the conversation's language.
+These files are the 0.1.6 release source for the English canonical instructions. Publication and installation updates require target-specific authorization and review. Source availability alone does not establish deployment, installation, actual skill loading, or runtime verification. See the [한국어 사용 안내](README.ko.md) for Korean usage guidance. English instructions do not set the response language: outputs follow the user's explicit language preference, or otherwise the conversation's language.
 
 ## Two workflows and roles
 
 1. The user and main agree on goals, scope, exclusions, completion criteria, write authority, record location, specification version, and the cycle scope/completion boundary. Agree on an end date only when needed; no fixed cadence is assumed.
 2. Under the approved specification, a worker develops allowed files and a reviewer other than the implementer reviews the fixed artifacts. Main compares the specification and evidence, then reports results.
+
+Version 0.1.6 defaults to complementary compact views when drafting, substantively updating, or explaining specifications or major design: an overview of components/responsibilities/flow paired with a relevant UML-style class, sequence, or state view, using Mermaid where suitable. Keep both with the same canonical Markdown specification/version and consistent status; honor user format preferences and explain an omitted redundant view. See the [paired-view example](software-factory/skills/software-factory/references/operating-examples.md#specification-diagram-example) for source and verification limits. Instructions have been trimmed while retaining the two workflows, role/authority boundaries, and brief report sections; load only situational references needed for the task. Static source checks establish neither model behavior nor efficiency gains.
 
 Main handles agreement, assignments, decision records, integrated assessment, and reporting; workers write product code, tests, and configuration. Only main creates additional agents; workers/reviewers must not delegate again or substitute a new Codex chat. If required multi-agent tools are unavailable, hold the affected implementation/review and report the limitation. Original project instructions take priority.
 
@@ -59,16 +61,21 @@ codex plugin marketplace list --json
 codex plugin list --json
 ```
 
-If a marketplace named `software-factory-local` already exists, check its `marketplaceSource` and provenance and obtain user authorization. Do not run the registration/installation commands below before authorization. Do not automatically overwrite a marketplace with the same name or delete it using `remove`. Hold the transition if provenance is unclear.
+If a marketplace named `software-factory-local` already exists, verify its `marketplaceSource` and the target plugin's source against the intended reviewed source. Reuse a verified matching registration under existing target/action authority; do not repeat registration. A different or unclear source requires a separately authorized transition before installation. Do not automatically overwrite a marketplace with the same name or delete it using `remove`.
 
-Once there is no name collision, or source verification and transition authorization are complete, register/install a published, reviewed commit. Replace the placeholder `<reviewed-commit-sha>` below with the full SHA of the reviewed commit provided to you. Do not insert this README's own commit hash into it.
+For an authorized new registration with no name collision, use a published, reviewed commit. Replace `<reviewed-commit-sha>` below with the full SHA of the reviewed commit provided to you. Do not insert this README's own commit hash into it.
 
 ```sh
 codex plugin marketplace add LWH4Data/software-factory --ref <reviewed-commit-sha>
+```
+
+After source verification and target installation/update authority are established, install or refresh only the target plugin. For an existing local source, first confirm its distribution checkout matches the published, reviewed commit and fixed package hashes.
+
+```sh
 codex plugin add software-factory@software-factory-local --json
 ```
 
-After installation, use the inspection commands above to check source, version, and installed/enabled values. Distinguish installation verification from actual skill loading and workflow compliance in a conversation.
+After installation, use the inspection commands above to check source, version, and installed/enabled values, and compare installed package bytes/hashes with the reviewed source. Distinguish installation verification from actual skill loading and workflow compliance in a conversation.
 
 Example request: `Use $software-factory to draft this project's development goals and specification with me.` For resumption/completion reports, also ask it to check the approved specification and latest checkpoint.
 
